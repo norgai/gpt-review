@@ -3,6 +3,22 @@ description: 'Review your PRs with a GPT Model from Azure Open AI'
 branding:
   icon: 'eye'
   color: 'gray-dark'
+inputs:
+  GITHUB_TOKEN:
+    description: 'Derivative token for using the GitHub REST API'
+    required: true
+  # OPENAI_API_KEY:
+  #   description: 'OpenAI API Key'
+  #   required: false
+  # OPENAI_ORG_KEY:
+  #   description: 'OpenAI Organization ID'
+  #   required: false
+  AZURE_OPENAI_API:
+    description: 'URL of custom Azure Open AI API'
+    required: true
+  AZURE_OPENAI_API_KEY:
+    description: 'Key of custom Azure Open AI API'
+    required: true
 
 runs:
   using: "composite"
@@ -40,14 +56,14 @@ runs:
         env:
           ACTION_REF: ${{ github.action_ref || env.BRANCH }}
           GIT_COMMIT_HASH: ${{ github.event.pull_request.head.sha }}
-          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
+          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
           LINK: "https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
           # OPENAI_API_KEY: ${{ inputs.OPENAI_API_KEY || ''}}
           # OPENAI_ORG_KEY: ${{ inputs.OPENAI_ORG_KEY || ''}}
           PR_TITLE: ${{ github.event.pull_request.title }}
           BRANCH:  ${{ env.BRANCH }}
-          AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API }}
-          AZURE_OPENAI_API: ${{ secrets.AZURE_OPENAI_API_KEY }}
+          AZURE_OPENAI_API_KEY: ${{ inputs.AZURE_OPENAI_API_KEY }}
+          AZURE_OPENAI_API: ${{ inputs.AZURE_OPENAI_API}}
           PATCH_PR: ${{ github.event.pull_request.number }}
           PATCH_REPO: ${{ github.repository }}
           FULL_SUMMARY: true
