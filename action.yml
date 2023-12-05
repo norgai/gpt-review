@@ -9,16 +9,16 @@ inputs:
     required: true
   OPENAI_API_KEY:
     description: 'OpenAI API Key'
-    required: true
+    required: false
   OPENAI_ORG_KEY:
     description: 'OpenAI Organization ID'
-    required: true
+    required: false
   AZURE_OPENAI_API:
     description: 'URL of custom Azure Open AI API'
-    required: false
+    required: true
   AZURE_OPENAI_API_KEY:
     description: 'Key of custom Azure Open AI API'
-    required: false
+    required: true
 
 runs:
   using: "composite"
@@ -56,12 +56,12 @@ runs:
           GIT_COMMIT_HASH: ${{ github.event.pull_request.head.sha }}
           GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
           LINK: "https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
-          OPENAI_API_KEY: ${{ inputs.OPENAI_API_KEY }}
-          OPENAI_ORG_KEY: ${{ inputs.OPENAI_ORG_KEY }}
+          OPENAI_API_KEY: ${{ inputs.OPENAI_API_KEY || ''}}
+          OPENAI_ORG_KEY: ${{ inputs.OPENAI_ORG_KEY || ''}}
           PR_TITLE: ${{ github.event.pull_request.title }}
           BRANCH:  ${{ env.BRANCH }}
-          AZURE_OPENAI_API_KEY: ${{ inputs.AZURE_OPENAI_API_KEY || '' }}
-          AZURE_OPENAI_API: ${{ inputs.AZURE_OPENAI_API || '' }}
+          AZURE_OPENAI_API_KEY: ${{ inputs.AZURE_OPENAI_API_KEY }}
+          AZURE_OPENAI_API: ${{ inputs.AZURE_OPENAI_API}}
           PATCH_PR: ${{ github.event.pull_request.number }}
           PATCH_REPO: ${{ github.repository }}
           FULL_SUMMARY: true
