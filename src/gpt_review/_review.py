@@ -24,6 +24,7 @@ _CHECKS = {
             "goal": """
             Provide suggestions for improving the changes in this PR.
             If the PR has no clear issues, mention that no suggestions are needed.
+            Answer me in Korean.
             """,
         },
     ],
@@ -33,6 +34,7 @@ _CHECKS = {
             "header": "Breaking Changes",
             "goal": """Detect breaking changes in a git diff. Here are some things that can cause a breaking change.
 - new parameters to public functions which are required and have no default value.
+Answer me in Korean.
 """,
         },
     ],
