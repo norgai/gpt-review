@@ -2,10 +2,15 @@
 import logging
 import os
 
-from openai import OpenAI
-
-client = OpenAI()
 from openai import RateLimitError
+from openai import AzureOpenAI
+    
+client = AzureOpenAI(
+    api_key=$AZURE_OPENAI_API_KEY,  
+    api_version="2023-07-01-preview",
+    azure_endpoint = $AZURE_OPENAI_API
+)
+
 
 import gpt_review.constants as C
 from gpt_review.context import _load_azure_openai_context
