@@ -19,6 +19,9 @@ inputs:
   AZURE_OPENAI_API_KEY:
     description: 'Key of custom Azure Open AI API'
     required: true
+  GPT_PROMPT:
+    description: 'Custom Summary Prompt'
+    required: true
 
 runs:
   using: "composite"
@@ -57,7 +60,7 @@ runs:
             --repository $PATCH_REPO
         env:
           ACTION_REF: ${{ github.action_ref || env.BRANCH }}
-          PROMPT: ${{ vars.GPT_PROMPT }}
+          PROMPT: ${{ inputs.GPT_PROMPT }}
           GIT_COMMIT_HASH: ${{ github.event.pull_request.head.sha }}
           GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
           LINK: "https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
