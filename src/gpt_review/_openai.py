@@ -2,15 +2,8 @@
 import logging
 import os
 
-from openai import RateLimitError
-from openai import AzureOpenAI
-    
-client = AzureOpenAI(
-    api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-    api_version="2023-07-01-preview",
-    azure_endpoint=os.getenv("AZURE_OPENAI_API")
-)
-
+import openai
+from openai.error import RateLimitError
 
 import gpt_review.constants as C
 from gpt_review.context import _load_azure_openai_context
@@ -95,22 +88,26 @@ def _call_gpt(
 
         if os.environ.get("OPENAI_API_TYPE", "") == C.AZURE_API_TYPE:
             logging.debug("Using Azure Open AI.")
-            completion = client.chat.completions.create(deployment_id=model,
-            messages=messages,
-            max_tokens=max_tokens,
-            temperature=temperature,
-            top_p=top_p,
-            frequency_penalty=frequency_penalty,
-            presence_penalty=presence_penalty)
+            completion = openai.ChatCompletion.create(
+                deployment_id=model,
+                messages=messages,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                top_p=top_p,
+                frequency_penalty=frequency_penalty,
+                presence_penalty=presence_penalty,
+            )
         else:
             logging.debug("Using Open AI.")
-            completion = client.chat.completions.create(model=model,
-            messages=messages,
-            max_tokens=max_tokens,
-            temperature=temperature,
-            top_p=top_p,
-            frequency_penalty=frequency_penalty,
-            presence_penalty=presence_penalty)
+            completion = openai.ChatCompletion.create(
+                model=model,
+                messages=messages,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                top_p=top_p,
+                frequency_penalty=frequency_penalty,
+                presence_penalty=presence_penalty,
+            )
         return completion.choices[0].message.content  # type: ignore
     except RateLimitError as error:
         if retry < C.MAX_RETRIES:
