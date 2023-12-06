@@ -2,4 +2,5 @@ _type: prompt
 input_variables:
     ["diff"]
 template: |
-  Below is a code patch, please help me do a brief code review on it. Any bug risks and/or improvement suggestions are welcome. Answer me in Korean. {diff}
+  Answer me in Korean. Below is a code patch, please help me do a brief code review on it. Any bug risks and/or improvement suggestions are welcome.
+  {diff}
