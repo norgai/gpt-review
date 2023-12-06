@@ -41,35 +41,23 @@ def _load_azure_openai_context() -> Context:
     azure_config = _load_context_file() if os.path.exists(os.getenv("CONTEXT_FILE", C.AZURE_CONFIG_FILE)) else {}
 
     if azure_config.get("azure_api_type"):
-        openai.api_type = os.environ["OPENAI_API_TYPE"] = azure_config.get("azure_api_type")
     elif os.getenv("AZURE_OPENAI_API"):
-        openai.api_type = os.environ["OPENAI_API_TYPE"] = C.AZURE_API_TYPE
     elif "OPENAI_API_TYPE" in os.environ:
-        openai.api_type = os.environ["OPENAI_API_TYPE"]
 
     if azure_config.get("azure_api_version"):
-        openai.api_version = os.environ["OPENAI_API_VERSION"] = azure_config.get("azure_api_version")
     elif os.getenv("AZURE_OPENAI_API"):
-        openai.api_version = os.environ["OPENAI_API_VERSION"] = C.AZURE_API_VERSION
     elif "OPENAI_API_VERSION" in os.environ:
-        openai.api_version = os.environ["OPENAI_API_VERSION"]
 
     if os.getenv("AZURE_OPENAI_API"):
-        openai.api_type = os.environ["OPENAI_API_TYPE"] = C.AZURE_API_TYPE
-        openai.api_base = os.environ["OPENAI_API_BASE"] = os.getenv("AZURE_OPENAI_API") or azure_config.get(
-            "azure_api_base"
-        )
-        openai.api_key = os.environ["OPENAI_API_KEY"] = os.getenv("AZURE_OPENAI_API_KEY")  # type: ignore
+          # type: ignore
     elif os.getenv("OPENAI_API_KEY"):
-        openai.api_key = os.environ["OPENAI_API_KEY"]
     else:
         kv_client = SecretClient(
             vault_url=os.getenv("AZURE_KEY_VAULT_URL", C.AZURE_KEY_VAULT),
             credential=DefaultAzureCredential(additionally_allowed_tenants=["*"]),
         )
-        openai.api_type = os.environ["OPENAI_API_TYPE"] = C.AZURE_API_TYPE
-        openai.api_base = os.environ["OPENAI_API_BASE"] = kv_client.get_secret("azure-open-ai").value  # type: ignore
-        openai.api_key = os.environ["OPENAI_API_KEY"] = kv_client.get_secret("azure-openai-key").value  # type: ignore
+          # type: ignore
+          # type: ignore
 
     return Context(
         azure_api_base=openai.api_base,
