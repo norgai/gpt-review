@@ -44,7 +44,7 @@ runs:
           # python -m pip install langchain==0.0.301
           # python -m pip install pydantic==1.10.13
           # python -m pip install openai==0.28.1
-          python -m pip install -r requirement.txt
+          python -m pip install -r ./gpt-review/requirement.txt
           python -m pip install ./gpt-review/ --no-deps
           # python -m pip install --no-deps openai==0.28.1
 
