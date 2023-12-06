@@ -40,24 +40,24 @@ def _load_azure_openai_context() -> Context:
     """
     azure_config = _load_context_file() if os.path.exists(os.getenv("CONTEXT_FILE", C.AZURE_CONFIG_FILE)) else {}
 
-    if azure_config.get("azure_api_type"):
-    elif os.getenv("AZURE_OPENAI_API"):
-    elif "OPENAI_API_TYPE" in os.environ:
+    # if azure_config.get("azure_api_type"):
+    # elif os.getenv("AZURE_OPENAI_API"):
+    # elif "OPENAI_API_TYPE" in os.environ:
 
-    if azure_config.get("azure_api_version"):
-    elif os.getenv("AZURE_OPENAI_API"):
-    elif "OPENAI_API_VERSION" in os.environ:
+    # if azure_config.get("azure_api_version"):
+    # elif os.getenv("AZURE_OPENAI_API"):
+    # elif "OPENAI_API_VERSION" in os.environ:
 
-    if os.getenv("AZURE_OPENAI_API"):
-          # type: ignore
-    elif os.getenv("OPENAI_API_KEY"):
-    else:
-        kv_client = SecretClient(
-            vault_url=os.getenv("AZURE_KEY_VAULT_URL", C.AZURE_KEY_VAULT),
-            credential=DefaultAzureCredential(additionally_allowed_tenants=["*"]),
-        )
-          # type: ignore
-          # type: ignore
+    # if os.getenv("AZURE_OPENAI_API"):
+    #       # type: ignore
+    # elif os.getenv("OPENAI_API_KEY"):
+    # else:
+    #     kv_client = SecretClient(
+    #         vault_url=os.getenv("AZURE_KEY_VAULT_URL", C.AZURE_KEY_VAULT),
+    #         credential=DefaultAzureCredential(additionally_allowed_tenants=["*"]),
+    #     )
+    #       # type: ignore
+    #       # type: ignore
 
     return Context(
         azure_api_base=openai.api_base,
