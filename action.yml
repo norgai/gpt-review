@@ -41,11 +41,11 @@ runs:
           python3 -m venv .env
           source .env/bin/activate
           python -m pip install --upgrade pip
-          python -m pip install langchain==0.0.301
-          python -m pip install pydantic==1.10.13
+          # python -m pip install langchain==0.0.301
+          # python -m pip install pydantic==1.10.13
           # python -m pip install openai==0.28.1
           python -m pip install ./gpt-review/
-          python -m pip install --no-deps openai==0.28.1
+          # python -m pip install --no-deps openai==0.28.1
 
       - name: Review PR and make comment
         shell: bash
