@@ -6,8 +6,6 @@ template: |
   # focusing on major modifications, additions, deletions, and any significant updates within the files.
   # Do not include the file name in the summary and list the summary with bullet points.
 
-Below is a code patch, please help me do a brief code review on it. Any bug risks and/or improvement suggestions are welcome.
-Answer me in Korean
-
+  Below is a code patch, please help me do a brief code review on it. Any bug risks and/or improvement suggestions are welcome. Answer me in Korean.
 
   {diff}
