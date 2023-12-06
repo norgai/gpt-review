@@ -2,10 +2,8 @@
 import logging
 import os
 
-from openai import OpenAI
-
-client = OpenAI()
-from openai import RateLimitError
+import openai
+from openai.error import RateLimitError
 
 import gpt_review.constants as C
 from gpt_review.context import _load_azure_openai_context
