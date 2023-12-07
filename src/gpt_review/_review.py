@@ -21,10 +21,7 @@ _CHECKS = {
         {
             "flag": "SUMMARY_SUGGEST",
             "header": "Suggestions",
-            "goal": """
-            Provide suggestions for improving the changes in this PR.
-            Answer me in Korean.
-            """,
+            "goal": "Provide suggestions for improving the changes in this PR. Answer me in Korean.",
         },
     ],
     "RISK_CHECKS": [
