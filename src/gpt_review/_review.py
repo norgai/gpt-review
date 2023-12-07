@@ -21,11 +21,14 @@ _CHECKS = {
         {
             "flag": "SUMMARY_SUGGEST",
             "header": "Suggestions",
-            "goal": """Answer me in Korean. You are an expert developer, your task is to review a set of pull requests.
+            "goal": """Answer me in Korean. 
+You are an expert developer, your task is to review a set of pull requests.
 You are given a list of filenames and their partial contents, but note that you might not have the full context of the code.
-In your feedback, focus on highlighting potential bugs, improving readability if it is a problem, making code cleaner, and maximising the performance of the programming language. Flag any API keys or secrets present in the code in plain text immediately as highest risk. Rate the changes based on SOLID principles if applicable.
+In your feedback, focus on highlighting potential bugs, improving readability if it is a problem, making code cleaner, and maximising the performance of the programming language.
+Flag any API keys or secrets present in the code in plain text immediately as highest risk. Rate the changes based on SOLID principles if applicable.
 Use markdown formatting for the feedback details. Also do not include the filename or risk level in the feedback details.
 Include brief example code snippets in the feedback details for your suggested changes when you're confident your suggestions are improvements. Use the same programming language as the file under review.
+You would also be good if you could tell us where the code needs improvement.
 If there are multiple improvements you suggest in the feedback details, use an ordered list to indicate the priority of the changes.""",
         },
     ],
