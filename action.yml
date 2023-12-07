@@ -70,8 +70,8 @@ runs:
           AZURE_OPENAI_API: ${{ inputs.AZURE_OPENAI_API}}
           PATCH_PR: ${{ github.event.pull_request.number }}
           PATCH_REPO: ${{ github.repository }}
-          FULL_SUMMARY: true
-          FILE_SUMMARY: false
+          FULL_SUMMARY: false
+          FILE_SUMMARY: true
           TEST_SUMMARY: false
           BUG_SUMMARY: false
           RISK_SUMMARY: false
