@@ -147,7 +147,7 @@ class AskCommandGroup(GPTCommandGroup):
             args.positional("question", type=str, nargs="+", help="Provide a question to ask GPT.")
             args.argument(
                 "fast",
-                help="Use gpt-35-turbo for prompts < 4000 tokens.",
+                help="Use gpt-35 for prompts < 4000 tokens.",
                 default=False,
                 action="store_true",
             )

@@ -2,7 +2,7 @@ azure_api_type: azure
 azure_api_base: https://lighthousekr.openai.azure.com/
 azure_api_version: 2023-07-01-preview
 azure_model_map:
-    turbo_llm_model_deployment_id: gpt-35-turbo
-    smart_llm_model_deployment_id: gpt-35-turbo
-    large_llm_model_deployment_id: gpt-35-turbo
+    turbo_llm_model_deployment_id: gpt-35
+    smart_llm_model_deployment_id: gpt-35
+    large_llm_model_deployment_id: gpt-35
     embedding_model_deployment_id: text-embedding-ada-002
