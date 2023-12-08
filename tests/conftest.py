@@ -119,7 +119,7 @@ def mock_github_comment(monkeypatch) -> None:
             return [
                 {
                     "user": {"login": "github-actions[bot]"},
-                    "body": "Summary by GPT-4",
+                    "body": "Summary by GPT",
                     "id": 1,
                 }
             ]

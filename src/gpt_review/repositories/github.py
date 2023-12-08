@@ -79,7 +79,7 @@ class GitHubClient(_RepositoryClient):
                 "user" in comment
                 and comment["user"]["login"] == "github-actions[bot]"
                 and "body" in comment
-                and "Summary by GPT-4" in comment["body"]
+                and "Summary by GPT" in comment["body"]
             ):
                 review_id = comment["id"]
                 data = {"body": review}
