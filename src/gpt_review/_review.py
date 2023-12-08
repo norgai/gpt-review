@@ -109,7 +109,7 @@ def _summarize_pr(git_diff) -> str:
     text = ""
     if os.getenv("FULL_SUMMARY", "true").lower() == "true":
         text += f"""
-{_request_goal(git_diff, goal="Below is a code patch, please help me do a very simple code review on it about 5 lines. Answer me in Korean. Do not include code patch content.")}
+{_request_goal(git_diff, goal="Below is a code patch, please help me do a very simple code review on it about 5 lines. Do not include code patch content. Please give your answer in Korean. ")}
 """
 
         text += _check_goals(git_diff, _CHECKS["SUMMARY_CHECKS"])
