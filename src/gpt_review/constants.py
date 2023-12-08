@@ -26,7 +26,7 @@ MAX_RETRIES = int(os.getenv("MAX_RETRIES", 15))
 DEFAULT_RETRY_AFTER = 30
 
 AZURE_API_TYPE = "azure"
-AZURE_API_VERSION = "2023-03-15-preview"
+AZURE_API_VERSION = "2023-07-01-preview"
 AZURE_CONFIG_FILE = "azure.yaml"
 AZURE_TURBO_MODEL = "gpt-35-turbo"
 AZURE_SMART_MODEL = "gpt-35-turbo"
