@@ -15,7 +15,7 @@ def _count_tokens(prompt) -> int:
     Determine number of tokens in prompt.
 
     Args:
-        prompt (str): The prompt to send to GPT-4.
+        prompt (str): The prompt to send to GPT.
 
     Returns:
         int: The number of tokens in the prompt.
@@ -26,12 +26,10 @@ def _count_tokens(prompt) -> int:
 def _get_model(prompt: str, max_tokens: int, fast: bool = False, large: bool = False) -> str:
     """
     Get the OpenAI model based on the prompt length.
-    - when greater then 8k use gpt-4-32k
-    - otherwise use gpt-4
     - enable fast to use gpt-35-turbo for small prompts
 
     Args:
-        prompt (str): The prompt to send to GPT-4.
+        prompt (str): The prompt to send to GPT.
         max_tokens (int): The maximum number of tokens to generate.
         fast (bool, optional): Whether to use the fast model. Defaults to False.
         large (bool, optional): Whether to use the large model. Defaults to False.
@@ -65,14 +63,14 @@ def _call_gpt(
     Call GPT with the given prompt.
 
     Args:
-        prompt (str): The prompt to send to GPT-4.
+        prompt (str): The prompt to send to GPT.
         temperature (float, optional): The temperature to use. Defaults to 0.10.
         max_tokens (int, optional): The maximum number of tokens to generate. Defaults to 500.
         top_p (float, optional): The top_p to use. Defaults to 1.
         frequency_penalty (float, optional): The frequency penalty to use. Defaults to 0.5.
         presence_penalty (float, optional): The presence penalty to use. Defaults to 0.0.
         retry (int, optional): The number of times to retry the request. Defaults to 0.
-        messages (List[Dict[str, str]], optional): The messages to send to GPT-4. Defaults to None.
+        messages (List[Dict[str, str]], optional): The messages to send to GPT. Defaults to None.
         fast (bool, optional): Whether to use the fast model. Defaults to False.
         large (bool, optional): Whether to use the large model. Defaults to False.
 

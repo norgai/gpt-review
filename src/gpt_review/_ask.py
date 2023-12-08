@@ -153,7 +153,7 @@ class AskCommandGroup(GPTCommandGroup):
             )
             args.argument(
                 "large",
-                help="Use gpt-4-32k for prompts.",
+                help="Use gpt for prompts.",
                 default=False,
                 action="store_true",
             )

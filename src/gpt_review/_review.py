@@ -1,4 +1,4 @@
-"""Basic functions for requesting review based goals from GPT-4."""
+"""Basic functions for requesting review based goals from GPT."""
 import os
 from dataclasses import dataclass
 from typing import Dict
@@ -53,17 +53,17 @@ class GitFile:
 
 def _request_goal(git_diff, goal, fast: bool = False, large: bool = False, temperature: float = 0) -> str:
     """
-    Request a goal from GPT-4.
+    Request a goal from GPT.
 
     Args:
         git_diff (str): The git diff to split.
-        goal (str): The goal to request from GPT-4.
+        goal (str): The goal to request from GPT.
         fast (bool, optional): Whether to use the fast model. Defaults to False.
         large (bool, optional): Whether to use the large model. Defaults to False.
         temperature (float, optional): The temperature to use. Defaults to 0.
 
     Returns:
-        response (str): The response from GPT-4.
+        response (str): The response from GPT.
     """
     prompt = f"""
 {goal}
@@ -178,7 +178,7 @@ def _summarize_risk(git_diff) -> str:
         git_diff (str): The git diff to split.
 
     Returns:
-        response (str): The response from GPT-4.
+        response (str): The response from GPT.
     """
     text = ""
     if os.getenv("RISK_SUMMARY", "true").lower() == "true":
@@ -193,7 +193,7 @@ def _summarize_risk(git_diff) -> str:
 def _summarize_files(git_diff) -> str:
     """Summarize git files."""
     summary = """
-# Summary by GPT-4
+# Summary by GPT
 """
 
     summary += _summarize_pr(git_diff)
@@ -240,7 +240,7 @@ def _review(diff: str = ".diff", config: str = "config.summary.yml") -> Dict[str
         config (str, optional): The config to use. Defaults to "config.summary.yml".
 
     Returns:
-        Dict[str, str]: The response from GPT-4.
+        Dict[str, str]: The response from GPT.
     """
 
     # If config is a file, use it
