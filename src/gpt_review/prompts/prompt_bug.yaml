@@ -5,5 +5,5 @@ template: |
   Provide a concise summary of the bug found in the code, describing its characteristics,
   location, and potential effects on the overall functionality and performance of the application.
   Present the potential issues and errors first, following by the most important findings, in your summary
-  Answer me in Korean.
+  Answer me in English.
   {diff}

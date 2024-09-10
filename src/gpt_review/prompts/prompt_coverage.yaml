@@ -7,5 +7,5 @@ template: |
   Generate unit test cases for the code submitted
   in the pull request, ensuring comprehensive coverage of all functions, methods,
   and scenarios to validate the correctness and reliability of the implementation.
-  Answer me in Korean.
+  Answer me in English.
   {diff}

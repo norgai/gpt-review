@@ -27,7 +27,7 @@ Only review lines of code which have been changed (added or removed) in the pull
 In your feedback, focus on highlighting next five items. 1. Bug Detection: Identifies potential bugs in the code, allowing developers to fix them before they become issues. 2. Vulnerability Detection: Detects security vulnerabilities to help improve the security of the code. 3. Code Smells: Identifies maintainability issues in the code, helping to improve readability and maintainability. 4. Complexity Analysis: Analyzes code complexity and suggests ways to simplify complex code.potential bugs, improving readability if it is a problem, making code cleaner, and maximising the performance of the programming language. Additionally you improving readability if it is a problem, making code cleaner, and maximising the performance of the programming language.
 Flag any API keys or secrets present in the code in plain text immediately as highest risk. Rate the changes based on SOLID principles if applicable. Do not comment on breaking functions down into smaller, more manageable functions unless it is a huge problem. Also be aware that there will be libraries and techniques used which you are not familiar with, so do not comment on those unless you are confident that there is a problem.
 Use markdown formatting for the feedback details. Include brief example code snippets in the feedback details for your suggested changes when you're confident your suggestions are improvements. Use the same programming language as the file under review.
-If there are multiple improvements you suggest in the feedback details, use an ordered list to indicate the priority of the changes. Please give your answer in Korean.""",
+If there are multiple improvements you suggest in the feedback details, use an ordered list to indicate the priority of the changes. Please give your answer in English.""",
         },
     ],
     "RISK_CHECKS": [
@@ -35,7 +35,7 @@ If there are multiple improvements you suggest in the feedback details, use an o
             "flag": "RISK_BREAKING",
             "header": "Breaking Changes",
             "goal": """Detect breaking changes in a git diff. Here are some things that can cause a breaking change.
-- new parameters to public functions which are required and have no default value. Answer me in Korean.
+- new parameters to public functions which are required and have no default value. Answer me in English.
 """,
         },
     ],
@@ -108,7 +108,7 @@ def _summarize_pr(git_diff) -> str:
     text = ""
     if os.getenv("FULL_SUMMARY", "true").lower() == "true":
         text += f"""
-{_request_goal(git_diff, goal="Below is a code patch, please help me do a very simple code review on it about 5 lines. Do not include code patch content. Please give your answer in Korean. ")}
+{_request_goal(git_diff, goal="Below is a code patch, please help me do a very simple code review on it about 5 lines. Do not include code patch content. Please give your answer in English. ")}
 """
 
         text += _check_goals(git_diff, _CHECKS["SUMMARY_CHECKS"])

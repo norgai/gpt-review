@@ -2,5 +2,5 @@ _type: prompt
 input_variables:
     ["diff"]
 template: |
-  Summarize the following file changed in a pull request submitted by a developer on GitHub. Simply. in Korean.
+  Summarize the following file changed in a pull request submitted by a developer on GitHub. Simply. in English.
   {diff}
