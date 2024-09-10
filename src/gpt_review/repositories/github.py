@@ -58,6 +58,7 @@ class GitHubClient(_RepositoryClient):
         Returns:
             requests.Response: The response.
         """
+        logging.info(f"[github.py 61][_post_pr_comment] {review}")
         data = {"body": review, "commit_id": git_commit_hash, "event": "COMMENT"}
         data = json.dumps(data)
 
@@ -100,7 +101,7 @@ class GitHubClient(_RepositoryClient):
                 data=data,
                 timeout=10,
             )
-        logging.debug(response.json())
+        logging.info(response.json())
         return response
 
     @staticmethod
@@ -120,7 +121,7 @@ class GitHubClient(_RepositoryClient):
             Dict[str, str]: The review.
         """
         review = _summarize_files(diff)
-        logging.debug(review)
+        logging.info(review)
 
         link = os.getenv("LINK")
         git_commit_hash = os.getenv("GIT_COMMIT_HASH")
@@ -130,9 +131,10 @@ class GitHubClient(_RepositoryClient):
             GitHubClient._post_pr_comment(
                 review=review, git_commit_hash=git_commit_hash, link=link, access_token=access_token
             )
+            logging.info(f"[github.py 133][post_pr_summary] PR Posted")
             return {"response": "PR posted"}
 
-        logging.warning("No PR to post too")
+        logging.info("[github.py 136][post_pr_summary] No PR to post too")
         return {"response": "No PR to post too"}
 
 
@@ -149,6 +151,8 @@ def _review(repository=None, pull_request=None, access_token=None) -> Dict[str, 
     """
     diff = GitHubClient.get_pr_diff(repository, pull_request, access_token)
     GitHubClient.post_pr_summary(diff)
+    logging.info("[github.py 152][_review]")
+    print("[github.py 155][_review]")
     return {"response": "Review posted as a comment."}
 
 
