@@ -43,7 +43,7 @@ class GitHubClient(_RepositoryClient):
         }
         logger.info(f"[github.py 43][get_pr_diff] headers: {headers}")
         response = requests.get(
-            f"https://api.github.com/repos/{owner}/{patch_repo}/pulls/{patch_pr}", headers=headers, timeout=30
+            f"https://api.github.com/repos/{patch_repo}/pulls/{patch_pr}", headers=headers, timeout=30
         )
         return response.text
 
