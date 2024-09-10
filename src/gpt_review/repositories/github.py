@@ -153,7 +153,7 @@ def _review(repository=None, pull_request=None, access_token=None) -> Dict[str, 
     GitHubClient.post_pr_summary(diff)
     logging.info("[github.py 152][_review]")
     print("[github.py 155][_review]")
-    return {"response": "Review posted as a comment."}
+    return {"response": "Review posted as a comment. Norg"}
 
 
 def _comment(question: str, comment_id: int, diff: str = ".diff", link=None, access_token=None) -> Dict[str, str]:
