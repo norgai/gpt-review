@@ -65,20 +65,26 @@ class GitHubClient(_RepositoryClient):
         data = json.dumps(data)
 
         owner = link.split("/")[-4]
+        logger.info(f"[github.py 68][_post_pr_comment] owner: {owner}")
         repo = link.split("/")[-3]
+        logger.info(f"[github.py 70][_post_pr_comment] repo: {repo}")
         pr_number = link.split("/")[-1]
+        logger.info(f"[github.py 72][_post_pr_comment] pr_number: {pr_number}")
 
         headers = {
             "Accept": "application/vnd.github+json",
             "authorization": f"Bearer {access_token}",
             "X-GitHub-Api-Version": "2022-11-28",
         }
-        response = requests.get(
+        logger.info(f"[github.py 79][_post_pr_comment] headers: {headers}")
+        response1 = requests.get(
             f"https://api.github.com/repos/{owner}/{repo}/pulls/{pr_number}/reviews", headers=headers, timeout=30
         )
-        comments = response.json()
+        comments = response1.json()
+        logger.info(f"[github.py 83][_post_pr_comment] comments: {comments}")
 
         for comment in comments:
+            logger.info(f"[github.py 85][_post_pr_comment] comment: {comment}")
             if (
                 "user" in comment
                 and comment["user"]["login"] == "github-actions[bot]"
@@ -89,23 +95,27 @@ class GitHubClient(_RepositoryClient):
                 data = {"body": review}
                 data = json.dumps(data)
 
-                response = requests.put(
+                response2 = requests.put(
                     f"https://api.github.com/repos/{owner}/{repo}/pulls/{pr_number}/reviews/{review_id}",
                     headers=headers,
                     data=data,
                     timeout=30,
                 )
+                logger.info(f"[github.py 99][_post_pr_comment] {response2.json()}")
                 break
         else:
             # https://api.github.com/repos/OWNER/REPO/pulls/PULL_NUMBER/reviews
-            response = requests.post(
+            responsex = requests.post(
                 f"https://api.github.com/repos/{owner}/{repo}/pulls/{pr_number}/reviews",
                 headers=headers,
                 data=data,
                 timeout=30,
             )
-        logger.info(response.json())
-        return response
+            logger.info(f"[github.py 114][_post_pr_comment] {responsex.json()}")
+            return responsex
+
+        logger.info(f"[github.py 117][_post_pr_comment] {response1.json()}")
+        return response1
 
     @staticmethod
     def post_pr_summary(diff) -> Dict[str, str]:
@@ -131,13 +141,14 @@ class GitHubClient(_RepositoryClient):
         access_token = os.getenv("GITHUB_TOKEN")
 
         if link and git_commit_hash and access_token:
-            GitHubClient._post_pr_comment(
+            logger.info(f"[github.py 144][post_pr_summary] link: {link} git_commit_hash: {git_commit_hash} access_token: {access_token}")
+            response = GitHubClient._post_pr_comment(
                 review=review, git_commit_hash=git_commit_hash, link=link, access_token=access_token
             )
-            logger.info(f"[github.py 133][post_pr_summary] PR Posted")
+            logger.info(f"[github.py 148][post_pr_summary] PR Posted {response}")
             return {"response": "PR posted"}
 
-        logger.info("[github.py 136][post_pr_summary] No PR to post too")
+        logger.info("[github.py 151][post_pr_summary] No PR to post too")
         return {"response": "No PR to post too"}
 
 
