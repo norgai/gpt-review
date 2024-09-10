@@ -34,15 +34,16 @@ class GitHubClient(_RepositoryClient):
         patch_repo = patch_repo or os.getenv("PATCH_REPO")
         patch_pr = patch_pr or os.getenv("PATCH_PR")
         access_token = access_token or os.getenv("GITHUB_TOKEN")
+        owner = os.getenv("GITHUB_OWNER") or "norgai"
 
         headers = {
             "Accept": "application/vnd.github.v3.diff",
             "authorization": f"Bearer {access_token}",
             "X-GitHub-Api-Version": "2022-11-28",
         }
-
+        logger.info(f"[github.py 43][get_pr_diff] headers: {headers}")
         response = requests.get(
-            f"https://api.github.com/repos/{patch_repo}/pulls/{patch_pr}", headers=headers, timeout=30
+            f"https://api.github.com/repos/{owner}/{patch_repo}/pulls/{patch_pr}", headers=headers, timeout=30
         )
         return response.text
 
