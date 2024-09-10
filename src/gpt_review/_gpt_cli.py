@@ -38,6 +38,9 @@ class GPTCommandsLoader(CLICommandsLoader):
 
 
 def cli() -> int:
+
+    setuo_logging()
+
     """The GPT CLI entry point."""
     gpt = GPTCLI(
         cli_name=CLI_NAME,
@@ -46,3 +49,22 @@ def cli() -> int:
         commands_loader_cls=GPTCommandsLoader,
     )
     return gpt.invoke(sys.argv[1:])
+
+def setuo_logging():
+    """Setup logging for the CLI."""
+    import logging
+
+    # Configure the logger
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)  # Set the log level to DEBUG for detailed output
+
+    # Create a stream handler to log to stdout (captured by GitHub Actions)
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setLevel(logging.DEBUG)
+
+    # Set the format for the logs
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    console_handler.setFormatter(formatter)
+
+    # Add the handler to the logger
+    logger.addHandler(console_handler)

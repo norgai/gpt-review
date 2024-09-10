@@ -13,6 +13,7 @@ from gpt_review._command import GPTCommandGroup
 from gpt_review._review import _summarize_files
 from gpt_review.repositories._repository import _RepositoryClient
 
+logger = logging.getLogger()
 
 class GitHubClient(_RepositoryClient):
     """GitHub client."""
@@ -58,7 +59,7 @@ class GitHubClient(_RepositoryClient):
         Returns:
             requests.Response: The response.
         """
-        logging.info(f"[github.py 61][_post_pr_comment] {review}")
+        logger.info(f"[github.py 61][_post_pr_comment] {review}")
         data = {"body": review, "commit_id": git_commit_hash, "event": "COMMENT"}
         data = json.dumps(data)
 
@@ -101,7 +102,7 @@ class GitHubClient(_RepositoryClient):
                 data=data,
                 timeout=10,
             )
-        logging.info(response.json())
+        logger.info(response.json())
         return response
 
     @staticmethod
@@ -121,7 +122,7 @@ class GitHubClient(_RepositoryClient):
             Dict[str, str]: The review.
         """
         review = _summarize_files(diff)
-        logging.info(review)
+        logger.info(review)
 
         link = os.getenv("LINK")
         git_commit_hash = os.getenv("GIT_COMMIT_HASH")
@@ -131,10 +132,10 @@ class GitHubClient(_RepositoryClient):
             GitHubClient._post_pr_comment(
                 review=review, git_commit_hash=git_commit_hash, link=link, access_token=access_token
             )
-            logging.info(f"[github.py 133][post_pr_summary] PR Posted")
+            logger.info(f"[github.py 133][post_pr_summary] PR Posted")
             return {"response": "PR posted"}
 
-        logging.info("[github.py 136][post_pr_summary] No PR to post too")
+        logger.info("[github.py 136][post_pr_summary] No PR to post too")
         return {"response": "No PR to post too"}
 
 
@@ -151,7 +152,7 @@ def _review(repository=None, pull_request=None, access_token=None) -> Dict[str, 
     """
     diff = GitHubClient.get_pr_diff(repository, pull_request, access_token)
     GitHubClient.post_pr_summary(diff)
-    logging.info("[github.py 152][_review]")
+    logger.info("[github.py 152][_review]")
     print("[github.py 155][_review]")
     return {"response": "Review posted as a comment. Norg"}
 
