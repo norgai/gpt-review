@@ -14,7 +14,7 @@ httpx==0.25.2
 isodate==0.6.1
 jmespath==1.0.1
 knack==0.11.0
-llama-index==0.6.14
+llama-index==0.8.20
 msal==1.26.0
 msal-extensions==1.0.0
 msrest==0.7.1
