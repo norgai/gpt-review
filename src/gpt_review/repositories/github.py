@@ -93,7 +93,7 @@ class GitHubClient(_RepositoryClient):
                     f"https://api.github.com/repos/{owner}/{repo}/pulls/{pr_number}/reviews/{review_id}",
                     headers=headers,
                     data=data,
-                    timeout=10,
+                    timeout=30,
                 )
                 break
         else:
@@ -102,7 +102,7 @@ class GitHubClient(_RepositoryClient):
                 f"https://api.github.com/repos/{owner}/{repo}/pulls/{pr_number}/reviews",
                 headers=headers,
                 data=data,
-                timeout=10,
+                timeout=30,
             )
         logger.info(response.json())
         return response
