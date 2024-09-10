@@ -38,10 +38,11 @@ class GitHubClient(_RepositoryClient):
         headers = {
             "Accept": "application/vnd.github.v3.diff",
             "authorization": f"Bearer {access_token}",
+            "X-GitHub-Api-Version": "2022-11-28",
         }
 
         response = requests.get(
-            f"https://api.github.com/repos/{patch_repo}/pulls/{patch_pr}", headers=headers, timeout=10
+            f"https://api.github.com/repos/{patch_repo}/pulls/{patch_pr}", headers=headers, timeout=30
         )
         return response.text
 
@@ -70,9 +71,10 @@ class GitHubClient(_RepositoryClient):
         headers = {
             "Accept": "application/vnd.github+json",
             "authorization": f"Bearer {access_token}",
+            "X-GitHub-Api-Version": "2022-11-28",
         }
         response = requests.get(
-            f"https://api.github.com/repos/{owner}/{repo}/pulls/{pr_number}/reviews", headers=headers, timeout=10
+            f"https://api.github.com/repos/{owner}/{repo}/pulls/{pr_number}/reviews", headers=headers, timeout=30
         )
         comments = response.json()
 
