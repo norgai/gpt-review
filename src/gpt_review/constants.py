@@ -28,9 +28,9 @@ DEFAULT_RETRY_AFTER = 30
 AZURE_API_TYPE = "azure"
 AZURE_API_VERSION = "2023-07-01-preview"
 AZURE_CONFIG_FILE = "azure.yaml"
-AZURE_TURBO_MODEL = "gpt-4o-demo"
-AZURE_SMART_MODEL = "gpt-4o-demo"
-AZURE_LARGE_MODEL = "gpt-4o-demo"
+AZURE_TURBO_MODEL = "gpt-4o"
+AZURE_SMART_MODEL = "gpt-4o"
+AZURE_LARGE_MODEL = "gpt-4o"
 AZURE_EMBEDDING_MODEL = "text-embedding-ada-002"
 
 BUG_PROMPT_YAML = "prompt_bug.yaml"
