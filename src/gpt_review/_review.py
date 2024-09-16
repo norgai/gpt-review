@@ -35,7 +35,9 @@ _CHECKS = {
                         Rate the changes based on SOLID principles if applicable. Only highlight if there is a major violation. If no violation, just say Pass with a green Tick Emoji.
 
                         Do not comment on breaking functions down into smaller, more manageable functions unless it is a huge problem.
+
                         Also be aware that there will be libraries and techniques used which you are not familiar with, so do not comment on those unless you are confident that there is a problem.
+
                         Use markdown formatting for the feedback details.
 
                         Use the same programming language as the file under review.
@@ -195,12 +197,12 @@ def _summarize_risk(git_diff) -> str:
         response (str): The response from GPT.
     """
     text = ""
-    if os.getenv("RISK_SUMMARY", "true").lower() == "true":
-        text += """
-## Potential Risks
+    # if os.getenv("RISK_SUMMARY", "true").lower() == "true":
+    #     text += """
+    #             ## Potential Risks
 
-"""
-        text += _check_goals(git_diff, _CHECKS["RISK_CHECKS"])
+    #             """
+    #     text += _check_goals(git_diff, _CHECKS["RISK_CHECKS"])
     return text
 
 
@@ -212,34 +214,35 @@ def _summarize_files(git_diff) -> str:
 
     summary += _summarize_pr(git_diff)
 
-    if os.getenv("FILE_SUMMARY", "true").lower() == "true":
-        file_summary = """
-## Changes
+    # if os.getenv("FILE_SUMMARY", "true").lower() == "true":
+    #     file_summary = """
+    #                     ## Changes
 
-"""
-        file_summary += "".join(_summarize_file(diff) for diff in _split_diff(git_diff))
-        if os.getenv("FILE_SUMMARY_FULL", "true").lower() == "true":
-            summary += file_summary
+    #                     """
 
-        summary += f"""
-### Summary of File Changes
-{_request_goal(file_summary, goal="Summarize the changes to the files.")}
-"""
+    #     file_summary += "".join(_summarize_file(diff) for diff in _split_diff(git_diff))
+    #     if os.getenv("FILE_SUMMARY_FULL", "true").lower() == "true":
+    #         summary += file_summary
 
-    if os.getenv("TEST_SUMMARY", "true").lower() == "true":
-        summary += f"""
-## Test Coverage
-{_summarize_test_coverage(git_diff)}
-"""
+    #     summary += f"""
+    #                 ### Summary of File Changes
+    #                 {_request_goal(file_summary, goal="Summarize the changes to the files.")}
+    #                 """
+
+    # if os.getenv("TEST_SUMMARY", "true").lower() == "true":
+    #     summary += f"""
+    #                 ## Test Coverage
+    #                 {_summarize_test_coverage(git_diff)}
+    #                 """
 
     if os.getenv("BUG_SUMMARY", "true").lower() == "true":
         question = load_bug_yaml().format(diff=git_diff)
         pr_bugs = _ask([question])["response"]
 
         summary += f"""
-## Potential Bugs
-{pr_bugs}
-"""
+                    ## Potential Bugs
+                    {pr_bugs}
+                    """
 
     summary += _summarize_risk(git_diff)
 
