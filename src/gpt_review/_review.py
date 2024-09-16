@@ -124,9 +124,10 @@ def _summarize_pr(git_diff) -> str:
     """
     text = ""
     if os.getenv("FULL_SUMMARY", "true").lower() == "true":
-        text += f"""
-{_request_goal(git_diff, goal="Below is a code patch, please help me do a very simple code review on it about 3 lines. Do not include code patch content. Please give your answer in English. ")}
-"""
+        text = ""
+        # text += f"""
+        #         {_request_goal(git_diff, goal="Below is a code patch, please help me do a very simple code review on it about 3 lines. Do not include code patch content. Please give your answer in English. ")}
+        #         """
 
         text += _check_goals(git_diff, _CHECKS["SUMMARY_CHECKS"])
     return text
@@ -209,7 +210,7 @@ def _summarize_risk(git_diff) -> str:
 def _summarize_files(git_diff) -> str:
     """Summarize git files."""
     summary = """
-# Summary by GPT
+# Code Review by Norg.ai
 """
 
     summary += _summarize_pr(git_diff)
