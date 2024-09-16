@@ -21,13 +21,28 @@ _CHECKS = {
         {
             "flag": "SUMMARY_SUGGEST",
             "header": "Suggestions",
-            "goal": """You are an expert developer, your task is to review a set of pull requests.
-You are given a list of filenames and their partial contents, but note that you might not have the full context of the code.
-Only review lines of code which have been changed (added or removed) in the pull request. The code looks similar to the output of a git diff command. Lines which have been removed are prefixed with a minus (-) and lines which have been added are prefixed with a plus (+). Other lines are added to provide context but should be ignored in the review.
-In your feedback, focus on highlighting next five items. 1. Bug Detection: Identifies potential bugs in the code, allowing developers to fix them before they become issues. 2. Vulnerability Detection: Detects security vulnerabilities to help improve the security of the code. 3. Code Smells: Identifies maintainability issues in the code, helping to improve readability and maintainability. 4. Complexity Analysis: Analyzes code complexity and suggests ways to simplify complex code.potential bugs, improving readability if it is a problem, making code cleaner, and maximising the performance of the programming language. Additionally you improving readability if it is a problem, making code cleaner, and maximising the performance of the programming language.
-Flag any API keys or secrets present in the code in plain text immediately as highest risk. Rate the changes based on SOLID principles if applicable. Do not comment on breaking functions down into smaller, more manageable functions unless it is a huge problem. Also be aware that there will be libraries and techniques used which you are not familiar with, so do not comment on those unless you are confident that there is a problem.
-Use markdown formatting for the feedback details. Include brief example code snippets in the feedback details for your suggested changes when you're confident your suggestions are improvements. Use the same programming language as the file under review.
-If there are multiple improvements you suggest in the feedback details, use an ordered list to indicate the priority of the changes. Please give your answer in English.""",
+            "goal": """ You are an expert developer, your task is to review a set of pull requests.
+                        You are given a list of filenames and their partial contents, but note that you might not have the full context of the code.
+                        Only review lines of code which have been changed (added or removed) in the pull request. The code looks similar to the output of a git diff command. Lines which have been removed are prefixed with a minus (-) and lines which have been added are prefixed with a plus (+). Other lines are added to provide context but should be ignored in the review.
+                        In your feedback, focus on highlighting next five items.
+
+                        1. Bug Detection: Identifies potential bugs in the code, allowing developers to fix them before they become issues. If no Bugs, just say Pass with a green Tick Emoji.  If bugs, highlight them very quickly.
+                        2. Code Smells: Identifies maintainability issues in the code, helping to improve readability and maintainability. Only outline major smells.  If no major smells, just say Pass with a green Tick Emoji.
+                        3. Complexity Analysis: Identify code that has a cyclomatic complexity of 10 or higher. Code function/method length should be less than 30 lines strictly. If no complexity issues, just say Pass with a green Tick Emoji.
+
+                        Flag any API keys or secrets present in the code in plain text immediately as highest risk.
+
+                        Rate the changes based on SOLID principles if applicable. Only highlight if there is a major violation. If no violation, just say Pass with a green Tick Emoji.
+
+                        Do not comment on breaking functions down into smaller, more manageable functions unless it is a huge problem.
+                        Also be aware that there will be libraries and techniques used which you are not familiar with, so do not comment on those unless you are confident that there is a problem.
+                        Use markdown formatting for the feedback details.
+
+                        Use the same programming language as the file under review.
+
+                        Keep it as brief as possible.
+
+                        Please give your answer in English.""",
         },
     ],
     "RISK_CHECKS": [
@@ -108,7 +123,7 @@ def _summarize_pr(git_diff) -> str:
     text = ""
     if os.getenv("FULL_SUMMARY", "true").lower() == "true":
         text += f"""
-{_request_goal(git_diff, goal="Below is a code patch, please help me do a very simple code review on it about 5 lines. Do not include code patch content. Please give your answer in English. ")}
+{_request_goal(git_diff, goal="Below is a code patch, please help me do a very simple code review on it about 3 lines. Do not include code patch content. Please give your answer in English. ")}
 """
 
         text += _check_goals(git_diff, _CHECKS["SUMMARY_CHECKS"])
