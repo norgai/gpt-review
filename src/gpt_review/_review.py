@@ -229,6 +229,11 @@ def _summarize_files(git_diff) -> str:
     #                 {_request_goal(file_summary, goal="Summarize the changes to the files.")}
     #                 """
 
+    summary += f"""
+                ## Logs
+                {_request_goal(git_diff, goal="Verify log / logger statements and console outputs are per the following standard:: [filename LineNumber][functionname/menthod] Message.  Use a green tick emoji if the log is correct.  Use a red cross emoji if the log is incorrect and highlight which lines of code are incorrect.")}
+                """
+
     # if os.getenv("TEST_SUMMARY", "true").lower() == "true":
     #     summary += f"""
     #                 ## Test Coverage
