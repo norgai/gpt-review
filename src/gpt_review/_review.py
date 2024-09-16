@@ -231,7 +231,7 @@ def _summarize_files(git_diff) -> str:
 
     summary += f"""
                 ## Logs
-                {_request_goal(git_diff, goal="Verify log / logger statements and console outputs are per the following standard:: [filename LineNumber][functionname/menthod] Message.  Use a green tick emoji if the log is correct.  Use a red cross emoji if the log is incorrect and highlight which lines of code are incorrect.")}
+                {_request_goal(git_diff, goal="Verify log / logger statements and console outputs are per the following standard:: [filename LineNumber][functionname/menthod] Message.  Use a green tick emoji if the log is correct.  Use a red cross emoji if the log is incorrect and highlight which lines of code are incorrect. In Javascript/Typscript the use of generateErrorCode function is also acceptable for messages/errors displayed to front end users.")}
                 """
 
     # if os.getenv("TEST_SUMMARY", "true").lower() == "true":
